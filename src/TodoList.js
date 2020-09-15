@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TodoItems from "./TodoItems";
 import "./TodoList.css";
 import Promise from "bluebird";
+import Login from "./components/pages/Login";
 
 const AppDAO = require('./db/dao').default
 const Crud = require('./db/crud').default
@@ -104,6 +105,7 @@ class TodoList extends Component {
                     </form>
                 </div>
                 <TodoItems entries={this.state.items} delete={this.deleteItem} />
+                < Login />
             </div>
         );
     }
