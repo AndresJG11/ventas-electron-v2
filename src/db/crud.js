@@ -25,7 +25,26 @@ class Crud {
     }
 
     getAll() {
-        return this.dao.all(`SELECT * FROM ToDos`);
+        return this.dao.all(`SELECT * FROM users`);
+    }
+
+    crearTablaRegistro(){
+        const sql = `
+      CREATE TABLE IF NOT EXISTS users (
+        DT INTEGER PRIMARY KEY,
+        userName TEXT,
+        password TEXT)`
+        return this.dao.run(sql);
+    }
+
+    crearUsuario(dt, userName, password){
+        return this.dao.run(
+            `INSERT INTO users (DT, userName, password) VALUES (?,?,?)`,
+            [dt, userName, password]);
+    }
+
+    checkLogin(userName, password){
+        return this.dao.get(`SELECT * FROM users WHERE userName='${userName}' AND password='${password}' `)
     }
 }
 

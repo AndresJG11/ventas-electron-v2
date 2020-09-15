@@ -15,9 +15,18 @@ class Login extends BaseComponent {
 		this.email_login = new React.createRef();
 		this.showPassword = new React.createRef();
 		this.onClickLogin = this.onClickLogin.bind(this);
+		this.onClickRegistro = this.onClickRegistro.bind(this);
 		this.handleShowPassword = this.handleShowPassword.bind(this);
 		this.state = { showPassword: false }
 
+		
+	}
+	
+	async onClickRegistro(e) {
+		e.preventDefault()
+		let username = this.email_login.current.value;
+		let pass = this.password_login.current.value;
+		this.registrarUsuario(username, pass).then((id) => console.log(id))		
 	}
 	
 	
@@ -26,8 +35,10 @@ class Login extends BaseComponent {
 		let username = this.email_login.current.value;
 		let pass = this.password_login.current.value;
 		var self = this;
-		this.addItem();
-		this.loadData();
+
+		const response = this.checkLogin(username, pass);
+		//this.addItem();
+		//this.loadData();
 
 
 		/*
@@ -72,6 +83,7 @@ class Login extends BaseComponent {
 
 	registrarse(e) {
 		console.log('registro')
+		this.registrarUsuario('user', 'user')
 	}
 
 	forgetPassword(e) {
@@ -81,6 +93,7 @@ class Login extends BaseComponent {
 	render() {
 		return (
 			<div className="wrapper">
+				<span> Login: {`${this.isLogged()}`} </span>
 				<div className="container">
 					<div className="col-left">
 						<div className="login-text">
@@ -106,6 +119,12 @@ class Login extends BaseComponent {
 								<p>
 									<input type="submit" value="Entrar" />
 								</p>
+							</form>
+
+							<form onSubmit={this.onClickRegistro}>
+							<p>
+								<input type="submit" value="Registrarse" />
+							</p>
 							</form>
 						</div>
 					</div>

@@ -25,6 +25,14 @@ class BaseComponent extends Component{
 		this.setDatabase();
         this.loadData();
 	}
+
+	crearTablaUsuarios(){
+		return this.db.crearTablaRegistro()
+	}
+
+	registrarUsuario(usuario, password){
+		return this.db.crearUsuario(Date.now(), usuario, password)
+	}
 	
 	setDatabase() {
         this.dao = new AppDAO('./database.sqlite');
@@ -36,7 +44,16 @@ class BaseComponent extends Component{
             .catch((err) => {
                 console.log('Error: ')
                 console.log(JSON.stringify(err))
-            });
+			});
+
+        this.db.crearTablaRegistro()
+            .then(() => {
+                console.log('users table is created...')
+            })
+            .catch((err) => {
+                console.log('Error users table: ')
+                console.log(JSON.stringify(err))
+			});
     }
 
     loadData() {
@@ -55,7 +72,12 @@ class BaseComponent extends Component{
             };
             this.db.insert(newItem.text, newItem.key);
         }
-    }
+	}
+	
+	checkLogin(userName, password){
+		const response = this.db.checkLogin(userName, password);
+		response.then( (id) => console.log('login', id) ).catch( (err) => console.log('Error Login') )
+	}
 
 
 	componentDidMount() {
