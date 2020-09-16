@@ -40,7 +40,7 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     }
-});
+}); //git remote add origin https://github.com/AndresJG11/ventas-electron-v2.git
 
 app.on('activate', () => {
     if (mainWindow === null) {

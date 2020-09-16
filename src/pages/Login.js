@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseComponent from '../BaseComponent';
+import BaseComponent from '../components/BaseComponent';
 
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -19,7 +19,7 @@ class Login extends BaseComponent {
 		this.handleShowPassword = this.handleShowPassword.bind(this);
 		this.state = { showPassword: false }
 
-
+		this.history = props.history; 
 	}
 
 	async onClickRegistro(e) {
@@ -42,6 +42,7 @@ class Login extends BaseComponent {
 			//BaseComponent.alertField.current.open("Usuario registrado con éxito", "success");
 			self.login("");
 			self.redirectTo("/home", "/home");
+			this.history.push('/vender')
 		}
 		//this.addItem();
 		//this.loadData();
@@ -113,11 +114,11 @@ class Login extends BaseComponent {
 							<form onSubmit={this.onClickLogin}>
 								<p>
 									<label>Nombre de usuario<span>*</span></label>
-									<input type="text" placeholder="Usuario" required ref={this.email_login} />
+									<input type="text" placeholder="Usuario" required ref={this.email_login} defaultValue={"user"}/>
 								</p>
 								<p>
 									<label>Contraseña<span>*</span></label>
-									<input type="password" placeholder="Contraseña" required ref={this.password_login} />
+									<input type="password" placeholder="Contraseña" required ref={this.password_login} defaultValue={"user"} />
 								</p>
 								<p>
 									<br />

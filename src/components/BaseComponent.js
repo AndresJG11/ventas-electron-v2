@@ -1,9 +1,14 @@
 import {Component} from 'react';
 import React from 'react';
-//import DataBaseHandler from '../utils/database'
-//import Router       from 'next/router';
 
 import Promise from "bluebird";
+
+//import { Redirect } from 'react-router-dom';
+
+import history from "./history";
+
+import { Redirect }from 'react-router-dom';
+
 
 const AppDAO = require('../db/dao').default
 const Crud = require('../db/crud').default
@@ -23,7 +28,7 @@ class BaseComponent extends Component{
 		this.isLogged = this.isLogged.bind(this);
 
 		this.setDatabase();
-        this.loadData();
+        //this.loadData();
 	}
 
 	crearTablaUsuarios(){
@@ -108,6 +113,9 @@ class BaseComponent extends Component{
 
 	redirectTo(to, alias){
 		//Router.push(to, alias);
+		//const history2 = require("history").createBrowserHistory()
+		//history2.push('/vender')
+		return <Redirect to="/ventas" push />
 	}
 }
 
