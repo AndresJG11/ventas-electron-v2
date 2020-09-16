@@ -33,7 +33,7 @@ class BaseComponent extends Component{
 	registrarUsuario(usuario, password){
 		return this.db.crearUsuario(Date.now(), usuario, password)
 	}
-	
+
 	setDatabase() {
         this.dao = new AppDAO('./database.sqlite');
         this.db = new Crud(this.dao);
@@ -63,7 +63,7 @@ class BaseComponent extends Component{
             console.log(data);
         })
 	}
-	
+
 	addItem(e) {
         if (true) {
             var newItem = {
@@ -73,10 +73,15 @@ class BaseComponent extends Component{
             this.db.insert(newItem.text, newItem.key);
         }
 	}
-	
-	checkLogin(userName, password){
-		const response = this.db.checkLogin(userName, password);
-		response.then( (id) => console.log('login', id) ).catch( (err) => console.log('Error Login') )
+
+	async checkLogin(userName, password){
+		let response = await this.db.checkLogin(userName, password);
+		if(response !== null && response !== undefined && response.userName === userName && password === response.password){
+			return response;
+		}
+		else{
+			return false;
+		}
 	}
 
 

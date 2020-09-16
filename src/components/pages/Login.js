@@ -19,24 +19,30 @@ class Login extends BaseComponent {
 		this.handleShowPassword = this.handleShowPassword.bind(this);
 		this.state = { showPassword: false }
 
-		
+
 	}
-	
+
 	async onClickRegistro(e) {
 		e.preventDefault()
 		let username = this.email_login.current.value;
 		let pass = this.password_login.current.value;
-		this.registrarUsuario(username, pass).then((id) => console.log(id))		
+		this.registrarUsuario(username, pass).then((id) => console.log(id))
 	}
-	
-	
+
+
 	async onClickLogin(e) {
 		e.preventDefault()
 		let username = this.email_login.current.value;
 		let pass = this.password_login.current.value;
 		var self = this;
 
-		const response = this.checkLogin(username, pass);
+		const response = await this.checkLogin(username, pass);
+		if(response !== false) {
+			console.log(response);
+			//BaseComponent.alertField.current.open("Usuario registrado con éxito", "success");
+			self.login("");
+			self.redirectTo("/home", "/home");
+		}
 		//this.addItem();
 		//this.loadData();
 
