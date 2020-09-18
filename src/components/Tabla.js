@@ -28,6 +28,7 @@ class Tabla extends BaseComponent {
                             <th id="ID" onClick={this.handleSort}> ID </th>
                             <th> Nombre </th>
                             <th> Cantidad </th>
+                            <th> Precio </th>
                             <th> Fecha de Edición (dd-mm-aa) </th>
                             <th> Código de barras </th>
                             <th> Operaciones </th>
@@ -38,6 +39,7 @@ class Tabla extends BaseComponent {
                             <td> {producto["id"]} </td>
                             <td> {producto["nombre"]} </td>
                             <td> {producto["cantidad"]} </td>
+                            <td> {producto["precio"]} </td>
                             <td> {this.formatDate(producto["fecha_edicion"])} </td>
                             <td> {producto["barras"]} </td>
 									 <td>

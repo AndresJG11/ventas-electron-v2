@@ -7,7 +7,7 @@ class App extends Component {
         const match = this.props.location.pathname;
         console.log('match  ', match)
         return (
-            match === '/login' ? < Login {...this.props} /> :
+            match === '/' ? < Login {...this.props} /> :
             <div className="page">
                 <div className="left-panel-container">
                     <LeftPanel {...this.props} />

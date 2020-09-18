@@ -31,7 +31,7 @@ class LeftPanel extends BaseComponent {
                  <button type="button" className={`btn btn-toggle ${this.fromIdButton==='vender'&&'toggle-active'}`} id="vender" onClick={this.handleOnClick}> Vender </button>
                  <button type="button" className={`btn btn-toggle ${this.fromIdButton==='generarReporte'&&'toggle-active'}`} id="generarReporte" onClick={this.handleOnClick}> Generar Reporte </button>
 					  <hr />
-                 <button type="button" className='btn btn-toggle' id="login" onClick={this.handleOnClick}> Cerrar sesión </button>
+                 <button type="button" className='btn btn-toggle' id="" onClick={this.handleOnClick}> Cerrar sesión </button>
              </div>
         );
     }

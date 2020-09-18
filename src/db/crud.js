@@ -3,14 +3,6 @@ class Crud {
         this.dao = dao
     }
 
-    createTable() {
-        const sql = `
-      CREATE TABLE IF NOT EXISTS ToDos (
-        DT INTEGER PRIMARY KEY,
-        ToDo TEXT)`
-        return this.dao.run(sql);
-    }
-
     insert(todo, dt) {
         return this.dao.run(
             'INSERT INTO ToDos (DT, ToDo) VALUES (?,?)',
@@ -28,15 +20,19 @@ class Crud {
         return this.dao.all(`SELECT * FROM users`);
     }
 
-    crearTablaRegistro(){
+    crearTablaUsuarios(){
         const sql = `
       CREATE TABLE IF NOT EXISTS users (
         DT INTEGER PRIMARY KEY,
+        nombre TEXT,
+        apellido TEXT,
+        puede_login,
+        last_login,
         userName TEXT,
         password TEXT)`
         return this.dao.run(sql);
     }
-
+    
     crearUsuario(dt, userName, password){
         return this.dao.run(
             `INSERT INTO users (DT, userName, password) VALUES (?,?,?)`,
@@ -46,6 +42,58 @@ class Crud {
     checkLogin(userName, password){
         return this.dao.get(`SELECT * FROM users WHERE userName='${userName}' AND password='${password}' `)
     }
+
+    crearTablaProductos(){
+        const sql = `
+        CREATE TABLE IF NOT EXISTS productos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT,
+            cantidad INTEGER,
+            fecha_edicion INTEGER,
+            barras INTEGER,
+            eliminado INTEGER DEFAULT 0,
+            precio INTEGER DEFAULT 0)`
+        return this.dao.run(sql);
+    }
+
+    crearProducto(nombre, cantidad, barras, precio){
+        return this.dao.run(
+            `INSERT INTO productos (nombre, cantidad, barras, precio) VALUES (?,?,?,?)`,
+            [nombre, cantidad, barras, precio]);
+    }
+
+    getAllProductos() {
+        return this.dao.all(`SELECT * FROM productos`);
+    }
+
+    deleteProducto(id) {
+        return this.dao.run(
+            `DELETE FROM productos WHERE id = ?`,
+            [id]
+        );
+    }
+
+    crearTablaVentas(){
+        const sql = `
+        CREATE TABLE IF NOT EXISTS ventas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            fecha INTEGER,
+            nombre_comprador TEXT,
+            direccion_comprador INTEGER,
+            telefono_comprador INTEGER)`
+        return this.dao.run(sql);
+    }
+
+    crearVenta(fecha, nombre_comprador, direccion_comprador, telefono_comprador){
+        return this.dao.run(
+            `INSERT INTO users (fecha, nombre_comprador, direccion_comprador, telefono_comprador) VALUES (?,?,?,?)`,
+            [fecha, nombre_comprador, direccion_comprador, telefono_comprador]);
+    }
+
+    getAllVentas(){
+        return this.dao.all(`SELECT * FROM ventas`);
+    }
+
 }
 
 export default Crud;

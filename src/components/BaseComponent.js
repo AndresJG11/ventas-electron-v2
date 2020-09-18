@@ -31,32 +31,46 @@ class BaseComponent extends Component{
         //this.loadData();
 	}
 
-	crearTablaUsuarios(){
-		return this.db.crearTablaRegistro()
-	}
-
 	registrarUsuario(usuario, password){
 		return this.db.crearUsuario(Date.now(), usuario, password)
+	}
+
+	registrarProducto(nombre, cantidad, barras, precio){
+		return this.db.crearProducto(nombre, cantidad, barras, precio)
+	}
+
+	registrarVenta(fecha, nombre_comprador, direccion_comprador, telefono_comprador){
+		return this.db.crearProducto(fecha, nombre_comprador, direccion_comprador, telefono_comprador)
+	}
+
+	obtenerProductos(){
+		return this.db.getAllProductos()
+	}
+
+	obtenerVentas(){
+		return this.db.getAllVentas()
+	}
+
+	borrarProducto(id){
+		return this.db.deleteProducto(id)
 	}
 
 	setDatabase() {
         this.dao = new AppDAO('./database.sqlite');
         this.db = new Crud(this.dao);
-        this.db.createTable()
-            .then(() => {
-                console.log('db is created...')
-            })
-            .catch((err) => {
-                console.log('Error: ')
+
+        this.db.crearTablaUsuarios().catch((err) => {
+                console.log('Error users table: ')
                 console.log(JSON.stringify(err))
 			});
 
-        this.db.crearTablaRegistro()
-            .then(() => {
-                console.log('users table is created...')
-            })
-            .catch((err) => {
-                console.log('Error users table: ')
+        this.db.crearTablaProductos().catch((err) => {
+                console.log('Error productos table: ')
+                console.log(JSON.stringify(err))
+			});
+
+        this.db.crearTablaVentas().catch((err) => {
+                console.log('Error ventas table: ')
                 console.log(JSON.stringify(err))
 			});
     }

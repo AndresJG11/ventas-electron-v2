@@ -37,8 +37,7 @@ class Vender extends BaseComponent {
 	}
 
 	async getProducts() {
-		const response = await fetch('http://localhost:8888/api/products/get');
-		const productsList = await response.json();
+		const productsList = await this.obtenerProductos()
 		this.setState({
 			"productos": productsList
 		});
@@ -65,7 +64,7 @@ class Vender extends BaseComponent {
 					});
 				}
 				else {
-					BaseComponent.alertField.current.open("Solo quedan " + (currentSelected["cantidad"] - allProductsSelected[idx]["added"]).toString() + " existencias de este producto", "error");
+					//BaseComponent.alertField.current.open("Solo quedan " + (currentSelected["cantidad"] - allProductsSelected[idx]["added"]).toString() + " existencias de este producto", "error");
 				}
 				flagRepetido = true;
 			}
@@ -81,7 +80,7 @@ class Vender extends BaseComponent {
 					allProductsSelected: products
 				})
 			} else {
-				BaseComponent.alertField.current.open("Solo poseemos " + currentSelected["cantidad"] + " existencias de este producto", "error");
+				//BaseComponent.alertField.current.open("Solo poseemos " + currentSelected["cantidad"] + " existencias de este producto", "error");
 			}
 		}
 	}
@@ -95,6 +94,8 @@ class Vender extends BaseComponent {
 				"telefono": this.telefonoComprador.current.value,
 			};
 
+			//this.registrarVenta(new Date().getDate(), )
+			/*
 			var self = this;
 			await fetch('http://localhost:8888/api/ventas/add', {
 				method: 'POST',
@@ -122,12 +123,12 @@ class Vender extends BaseComponent {
 				.catch((error) => {
 					console.error(error);
 				});
-
+				*/
 
 
 		}
 		else {
-			BaseComponent.alertField.current.open("Por favor agregue al menos un producto", "error");
+			//BaseComponent.alertField.current.open("Por favor agregue al menos un producto", "error");
 		}
 	}
 

@@ -41,7 +41,7 @@ class Login extends BaseComponent {
 			//BaseComponent.alertField.current.open("Usuario registrado con éxito", "success");
 			self.login("");
 			console.log("current url:", this.props)
-			this.props.history.push('/')
+			this.props.history.push('/vender')
 		}
 		//this.addItem();
 		//this.loadData();

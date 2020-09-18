@@ -53,6 +53,7 @@ class VerProductos extends BaseComponent {
 		this.modalNombre = React.createRef();
 		this.modalCantidad = React.createRef();
 		this.modalCodigo = React.createRef();
+		this.modalPrecio = React.createRef();
 		this.formularioAdd = React.createRef();
 		this.getAddProductForm = this.getAddProductForm.bind(this);
 
@@ -67,8 +68,7 @@ class VerProductos extends BaseComponent {
 	}
 
 	async getProducts() {
-		const response = await fetch('http://localhost:8888/api/products/get');
-		const productsList = await response.json();
+		const productsList = await this.obtenerProductos();
 		this.setState({
 			"productos": productsList
 		});
@@ -101,39 +101,55 @@ class VerProductos extends BaseComponent {
 		let nombre = this.modalNombre.current.value;
 		let cantidad = this.modalCantidad.current.value;
 		let codigo = this.modalCodigo.current.value;
-
-
-		var self = this;
-		await fetch('http://localhost:8888/api/products/add', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				nombre: nombre,
-				cantidad: cantidad,
-				codigo: codigo
-			})
+		let precio = this.modalCodigo.current.value;
+		this.registrarProducto(nombre, cantidad, codigo, precio).then( async (id) => {
+			//BaseComponent.alertField.current.open("Producto creado con éxito", "success");
+			await this.getProducts();
+			this.setState({ isModalOpen: false });
+		}).catch((err) => {
+			console.log('Error creando producto: ')
+			console.log(JSON.stringify(err))
 		})
-			.then((response) => response.json())
-			.then(async function (responseJson) {
-				if (responseJson[0] === true) {
-					self.setState({ isModalOpen: false });
-					BaseComponent.alertField.current.open("Producto creado con éxito", "success");
-					await self.getProducts();
-				}
-				else {
-					self.setState({ isModalOpen: false });
-					BaseComponent.alertField.current.open("Error al crear el producto", "error");
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+
+		/*
+				var self = this;
+				await fetch('http://localhost:8888/api/products/add', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						nombre: nombre,
+						cantidad: cantidad,
+						codigo: codigo
+					})
+				})
+					.then((response) => response.json())
+					.then(async function (responseJson) {
+						if (responseJson[0] === true) {
+							self.setState({ isModalOpen: false });
+							BaseComponent.alertField.current.open("Producto creado con éxito", "success");
+							await self.getProducts();
+						}
+						else {
+							self.setState({ isModalOpen: false });
+							BaseComponent.alertField.current.open("Error al crear el producto", "error");
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});*/
 	}
 
 	async deleteFunction(id) {
+		const self = this
+		this.borrarProducto(id).then(async (lasID) => {
+			//BaseComponent.alertField.current.open("Producto eliminado con éxito", "success");
+			await self.getProducts();
+		})
+
+		/*
 		var self = this;
 		await fetch('http://localhost:8888/api/products/delete', {
 			method: 'POST',
@@ -159,7 +175,7 @@ class VerProductos extends BaseComponent {
 			})
 			.catch((error) => {
 				console.error(error);
-			});
+			});*/
 	}
 
 	render() {
@@ -194,6 +210,17 @@ class VerProductos extends BaseComponent {
 									margin="dense"
 									id="cantidad"
 									label="Cantidad"
+									type="number"
+									fullWidth
+									required={true}
+									helperText="Este valor debe ser numérico."
+								/>
+								<TextField
+									inputRef={this.modalPrecio}
+									autoFocus
+									margin="dense"
+									id="precio"
+									label="Precio"
 									type="number"
 									fullWidth
 									required={true}
