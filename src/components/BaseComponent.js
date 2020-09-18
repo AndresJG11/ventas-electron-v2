@@ -115,7 +115,7 @@ class BaseComponent extends Component{
 		//Router.push(to, alias);
 		//const history2 = require("history").createBrowserHistory()
 		//history2.push('/vender')
-		return <Redirect to="/ventas" push />
+		//return <Redirect to="/ventas" push />
 	}
 }
 

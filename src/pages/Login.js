@@ -19,7 +19,6 @@ class Login extends BaseComponent {
 		this.handleShowPassword = this.handleShowPassword.bind(this);
 		this.state = { showPassword: false }
 
-		this.history = props.history; 
 	}
 
 	async onClickRegistro(e) {
@@ -41,8 +40,8 @@ class Login extends BaseComponent {
 			console.log(response);
 			//BaseComponent.alertField.current.open("Usuario registrado con éxito", "success");
 			self.login("");
-			self.redirectTo("/home", "/home");
-			this.history.push('/vender')
+			console.log("current url:", this.props)
+			this.props.history.push('/')
 		}
 		//this.addItem();
 		//this.loadData();

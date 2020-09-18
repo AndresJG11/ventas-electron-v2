@@ -11,13 +11,15 @@ class LeftPanel extends BaseComponent {
         this.typeField = "Header";
         this.state = { searchInput: "" }
         this.handleOnClick = this.handleOnClick.bind(this);
-	     this.fromIdButton = 'verVentas';
+	    this.fromIdButton = 'verVentas';
     }
 
     handleOnClick = (e) => {
         e.preventDefault();
         this.fromIdButton = e.target.id;
-        this.redirectTo(`/${this.fromIdButton}`)
+        //this.redirectTo(`/${this.fromIdButton}`)
+        console.log(this.props)
+        this.props.history.push(`/${this.fromIdButton}`)
     }
 
 
@@ -29,7 +31,7 @@ class LeftPanel extends BaseComponent {
                  <button type="button" className={`btn btn-toggle ${this.fromIdButton==='vender'&&'toggle-active'}`} id="vender" onClick={this.handleOnClick}> Vender </button>
                  <button type="button" className={`btn btn-toggle ${this.fromIdButton==='generarReporte'&&'toggle-active'}`} id="generarReporte" onClick={this.handleOnClick}> Generar Reporte </button>
 					  <hr />
-                 <button type="button" className='btn btn-toggle' id="generarReporte" onClick={this.logout}> Cerrar sesión </button>
+                 <button type="button" className='btn btn-toggle' id="login" onClick={this.handleOnClick}> Cerrar sesión </button>
              </div>
         );
     }
