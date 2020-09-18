@@ -12,6 +12,7 @@ import { createBrowserHistory } from 'history'
 
 
 import './public/styles/main.scss'
+import LeftPanel from "./components/LeftPanel";
 
 const destination = document.querySelector("#container");
 const history = createBrowserHistory();
@@ -19,21 +20,17 @@ const history = createBrowserHistory();
 //  <Route path="/" render={(props) => <ButtonToNavigate {...props} title="Navigate elsewhere" />} />
 ReactDOM.render(
     <div>
-        <Router>
-            <Switch>
-
-            <Route exact path="/" component={App} />
-            <Route path="/login" component={Login} />
-            </Switch>
+        <Router >
+            <Route path="/login" children={(props) => <App {...props} />} />
+            <Route path='/vender' component={Vender} />
+            <Route path='/generarReporte' component={GenerarReporte} />
+            <Route path='/verProductos' component={VerProductos} />
         </Router>
         { /* <Router history={history}>
             <Route history={history} path='/vender' component={Vender} />
               <LeftPanel history={history} />
               <Switch>
                   <Route exact path="/" render={(props) => <Login {...props} />} />
-                  <Route history={history} path='/verProductos' component={VerProductos} />
-                  <Route history={history} path='/generarReporte' component={GenerarReporte} />
-                  <Route history={history} path='/vender' component={Vender} />
               </Switch>
     </Router>*/}
     </div>,

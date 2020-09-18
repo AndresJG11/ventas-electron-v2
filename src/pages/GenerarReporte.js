@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import TextField from '@material-ui/core/TextField';
-import {ReportePDF} from '../components/ReportePDF'
+import { ReportePDF } from '../components/ReportePDF'
 import BaseComponent from '../components/BaseComponent'
 
 
@@ -70,44 +70,50 @@ class GenerarReporte extends BaseComponent {
                 fecha: this.state.fechaInicio,
             })
         }
-        this.setState( {dataReporte} )
+        this.setState({ dataReporte })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.simularReporte(3)
     }
 
     render() {
         const { dataReporte } = this.state;
         return (
-            <div className="generarReporte-root">
-                <form noValidate>
-                    <TextField
-                        id="inicio"
-                        label="Inicio"
-                        type="date"
-                        onChange={this.handleDataChange}
-                        defaultValue={this.getTodayDate()}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <TextField
-                        id="final"
-                        label="Final"
-                        onChange={this.handleDataChange}
-                        type="date"
-                        defaultValue={this.getTodayDate()}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                </form>
+            <div className="page">
 
-                <button className="btn" onClick={this.handleGenerarReporte} > Generar Reporte </button>
+<div className="left-panel-container"> </div>
 
-                <div className="generarReporte-pdf">
-                    {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} /> }
+
+                <div className="generarReporte-root">
+                    <form noValidate>
+                        <TextField
+                            id="inicio"
+                            label="Inicio"
+                            type="date"
+                            onChange={this.handleDataChange}
+                            defaultValue={this.getTodayDate()}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            id="final"
+                            label="Final"
+                            onChange={this.handleDataChange}
+                            type="date"
+                            defaultValue={this.getTodayDate()}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </form>
+
+                    <button className="btn" onClick={this.handleGenerarReporte} > Generar Reporte </button>
+
+                    <div className="generarReporte-pdf">
+                        {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} />}
+                    </div>
                 </div>
             </div>
         )
