@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Tabla from '../components/Tabla';
-import Header from '../components/Header';
+//import Header from '../components/Header';
 import BaseComponent from '../components/BaseComponent'
 
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import ClearIcon from '@material-ui/icons/Clear';
 
-import Modal from '@material-ui/core/Modal';
+//import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+//import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import AlertField from '../components/AlertField';
@@ -41,7 +41,7 @@ class VerProductos extends BaseComponent {
 
 		console.log("VerProductos")
 
-		this.state = { searchTable: '', isModalOpen: false }
+		this.state = { isModalOpen: false }
 
 		this.handleAddProduct = this.handleOpenModal.bind(this);
 		this.handleOnChange = this.handleOnChange.bind(this);
@@ -69,9 +69,9 @@ class VerProductos extends BaseComponent {
 	}
 
 	async getProducts() {
-		const productsList = await this.obtenerProductos();
+		this.productsList = await this.obtenerProductos();
 		this.setState({
-			"productos": productsList
+			"productos": this.productsList
 		});
 	}
 
@@ -84,13 +84,18 @@ class VerProductos extends BaseComponent {
 	}
 
 	handleOnChange(e) {
-		const value = e.target.value;
-		this.setState({ searchTable: value });
+		const criterioBusqueda = this.textInput.current.value;
+		if(criterioBusqueda.length >= 3){
+			const filterArray = this.productsList.filter( (producto) => (producto["nombre"]+producto["barras"]).includes(criterioBusqueda) )
+			this.setState( {"productos": filterArray } )
+		} else{
+			this.setState( {"productos": this.productsList } )
+		}
 	}
 
 	handleDeleteText(e) {
-		this.setState({ searchTable: '' })
 		this.textInput.current.focus();
+		this.textInput.current.value = '';
 	}
 
 	handleModalClose() {
@@ -103,8 +108,13 @@ class VerProductos extends BaseComponent {
 		let cantidad = this.modalCantidad.current.value;
 		let codigo = this.modalCodigo.current.value;
 		let precio = this.modalCodigo.current.value;
+<<<<<<< HEAD
 		this.registrarProducto(nombre, cantidad, codigo, precio).then( async (id) => {
 			BaseComponent.alertField.current.open("Producto creado con éxito", "success");
+=======
+		this.registrarProducto(nombre, cantidad, codigo, precio).then(async (id) => {
+			//BaseComponent.alertField.current.open("Producto creado con éxito", "success");
+>>>>>>> 10c8b07a2ca3ee21ff9d11986ab016d8eab43164
 			await this.getProducts();
 			this.setState({ isModalOpen: false });
 		}).catch((err) => {
@@ -181,7 +191,7 @@ class VerProductos extends BaseComponent {
 
 	render() {
 
-		const { searchTable, isModalOpen } = this.state;
+		const { isModalOpen } = this.state;
 
 		return (
 			<div className="page">
@@ -260,8 +270,8 @@ class VerProductos extends BaseComponent {
 						</button>
 
 						<div className="input-icons">
-							<ClearIcon className={`mi icon ${this.state.searchTable.length === 0 && 'invisible'} `} onClick={this.handleDeleteText} />
-							<input type="text" className="input-search" placeholder="Buscar en tabla..." ref={this.textInput} onChange={this.handleOnChange} value={this.state.searchTable} />
+							<ClearIcon className={`mi icon ${this.textInput.current?.value.length === 0 && 'invisible'} `} onClick={this.handleDeleteText} />
+							<input type="text" className="input-search" placeholder="Buscar en tabla..." ref={this.textInput} onChange={this.handleOnChange} />
 						</div>
 						<br />
 						<br />

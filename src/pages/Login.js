@@ -1,10 +1,10 @@
 import React from 'react';
 import BaseComponent from '../components/BaseComponent';
 
-import EmailIcon from '@material-ui/icons/Email';
+/*import EmailIcon from '@material-ui/icons/Email';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Promise from "bluebird";
+import Promise from "bluebird";*/
 
 import AlertField from '../components/AlertField';
 

@@ -13,7 +13,7 @@ class TablaVentas extends Component {
         return (`${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`)
     }
     handleSort = (e) => {
-        const colToSort = e.target.id;
+        //const colToSort = e.target.id;
     }
 
     handleDeleteProduct(productToDelete) {
@@ -21,6 +21,15 @@ class TablaVentas extends Component {
         const indexToDelete = items.indexOf(productToDelete)
         items.splice(indexToDelete, 1)
         this.props.estado.setState({ allProductsSelected: items });
+    }
+
+    getTotal(productos){
+       let total = 0;
+       productos.map( producto => { 
+           total += producto["precio"]*producto["added"];
+           return(null)
+      } )
+       return total
     }
 
     render() {
@@ -33,6 +42,7 @@ class TablaVentas extends Component {
                         <tr>
                             <th> Producto </th>
                             <th> Cantidad </th>
+                            <th> Precio </th>
                             <th> Código de barras </th>
                             <th> Eliminar </th>
                         </tr>
@@ -41,9 +51,15 @@ class TablaVentas extends Component {
                         {productos.map((producto) => <tr key={producto["id"]}>
                             <td> {producto["nombre"]} </td>
                             <td> {producto["added"]} </td>
+                            <td> {producto["precio"]} </td>
                             <td> {producto["barras"]} </td>
                             <td> <DeleteIcon onClick={(e) => this.handleDeleteProduct(producto)} style={{ cursor: 'pointer' }} id={producto['id']} /> </td>
                         </tr>)}
+                        <tr></tr>
+                        <tr> 
+                            <td colSpan={2} className="total"> Total </td> 
+                            <td colSpan={3} className="total"> {this.getTotal(productos)} </td> 
+                        </tr>
                     </tbody>
                 </table>
             </div>

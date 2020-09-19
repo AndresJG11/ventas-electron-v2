@@ -3,13 +3,6 @@ import React from 'react';
 
 import Promise from "bluebird";
 
-//import { Redirect } from 'react-router-dom';
-
-import history from "./history";
-
-import { Redirect }from 'react-router-dom';
-
-
 const AppDAO = require('../db/dao').default
 const Crud = require('../db/crud').default
 

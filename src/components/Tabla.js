@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
 import BaseComponent from '../components/BaseComponent'
 
@@ -14,7 +14,7 @@ class Tabla extends BaseComponent {
         return (`${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`)
     }
     handleSort = (e) => {
-        const colToSort = e.target.id;
+       //  const colToSort = e.target.id;
 
     }
 
