@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { ReportePDF } from '../components/ReportePDF'
 import BaseComponent from '../components/BaseComponent'
 
+import AlertField from '../components/AlertField';
 
 
 class GenerarReporte extends BaseComponent {
@@ -82,7 +83,7 @@ class GenerarReporte extends BaseComponent {
         return (
             <div className="page">
 
-<div className="left-panel-container"> </div>
+					<div className="left-panel-container"> </div>
 
 
                 <div className="generarReporte-root">
@@ -115,6 +116,9 @@ class GenerarReporte extends BaseComponent {
                         {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} />}
                     </div>
                 </div>
+
+
+	 				<AlertField ref={BaseComponent.alertField} />
             </div>
         )
     }

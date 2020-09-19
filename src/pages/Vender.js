@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
+import AlertField from '../components/AlertField';
 
 
 class Vender extends BaseComponent {
@@ -64,7 +65,7 @@ class Vender extends BaseComponent {
 					});
 				}
 				else {
-					//BaseComponent.alertField.current.open("Solo quedan " + (currentSelected["cantidad"] - allProductsSelected[idx]["added"]).toString() + " existencias de este producto", "error");
+					BaseComponent.alertField.current.open("Solo quedan " + (currentSelected["cantidad"] - allProductsSelected[idx]["added"]).toString() + " existencias de este producto", "error");
 				}
 				flagRepetido = true;
 			}
@@ -80,7 +81,7 @@ class Vender extends BaseComponent {
 					allProductsSelected: products
 				})
 			} else {
-				//BaseComponent.alertField.current.open("Solo poseemos " + currentSelected["cantidad"] + " existencias de este producto", "error");
+				BaseComponent.alertField.current.open("Solo poseemos " + currentSelected["cantidad"] + " existencias de este producto", "error");
 			}
 		}
 	}
@@ -100,6 +101,7 @@ class Vender extends BaseComponent {
 				console.log(item["id"], id_venta)
 				this.registrarVentaProducto(item["id"], id_venta);
 			})
+			BaseComponent.alertField.current.open("Venta agregada con éxito", "success");
 
 
 
@@ -137,7 +139,7 @@ class Vender extends BaseComponent {
 
 		}
 		else {
-			//BaseComponent.alertField.current.open("Por favor agregue al menos un producto", "error");
+			BaseComponent.alertField.current.open("Por favor agregue al menos un producto", "error");
 		}
 	}
 
@@ -238,6 +240,8 @@ class Vender extends BaseComponent {
 						</button>
 					</div>
 				</div>
+
+				<AlertField ref={BaseComponent.alertField} />
 			</div>
 		)
 	}

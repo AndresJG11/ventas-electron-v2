@@ -6,6 +6,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Promise from "bluebird";
 
+import AlertField from '../components/AlertField';
 
 class Login extends BaseComponent {
 	constructor(props) {
@@ -135,6 +136,8 @@ class Login extends BaseComponent {
 						</div>
 					</div>
 				</div>
+
+ 				<AlertField ref={BaseComponent.alertField} />
 			</div>
 		);
 	}

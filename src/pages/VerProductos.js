@@ -16,6 +16,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import AlertField from '../components/AlertField';
 
 /*
 const simularProductos = (cantidad = 2) => {
@@ -103,7 +104,7 @@ class VerProductos extends BaseComponent {
 		let codigo = this.modalCodigo.current.value;
 		let precio = this.modalCodigo.current.value;
 		this.registrarProducto(nombre, cantidad, codigo, precio).then( async (id) => {
-			//BaseComponent.alertField.current.open("Producto creado con éxito", "success");
+			BaseComponent.alertField.current.open("Producto creado con éxito", "success");
 			await this.getProducts();
 			this.setState({ isModalOpen: false });
 		}).catch((err) => {
@@ -145,7 +146,7 @@ class VerProductos extends BaseComponent {
 	async deleteFunction(id) {
 		const self = this
 		this.borrarProducto(id).then(async (lasID) => {
-			//BaseComponent.alertField.current.open("Producto eliminado con éxito", "success");
+			BaseComponent.alertField.current.open("Producto eliminado con éxito", "success");
 			await self.getProducts();
 		})
 
@@ -276,6 +277,9 @@ class VerProductos extends BaseComponent {
 						}
 					</div>
 				</div>
+
+
+				<AlertField ref={BaseComponent.alertField} />
 			</div>
 		);
 	}
