@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react'
+import React from 'react'
 
 import TablaVentas from '../components/TablaVentas'
 import BaseComponent from '../components/BaseComponent'
@@ -48,7 +48,7 @@ class Vender extends BaseComponent {
 	}
 
 	handleAgregarProducto(e) {
-		const { productos, currentSelected, allProductsSelected } = this.state
+		const { currentSelected, allProductsSelected } = this.state
 		currentSelected["cantidad"] = parseInt(currentSelected["cantidad"], 10);
 		console.log(currentSelected["cantidad"]);
 		const cantidad = this.cantidad.current.value;
@@ -68,6 +68,7 @@ class Vender extends BaseComponent {
 				}
 				flagRepetido = true;
 			}
+			return(null);
 		});
 
 		if (!flagRepetido) {
@@ -87,18 +88,19 @@ class Vender extends BaseComponent {
 
 	async addVenta() {
 		if (this.state.allProductsSelected.length > 0) {
-			let dataVenta = {
+			/*let dataVenta = {
 				"productos": this.state.allProductsSelected,
 				"nombre": this.nombreComprador.current.value,
 				"direccion": this.direccionComprador.current.value,
 				"telefono": this.telefonoComprador.current.value,
-			};
+			};*/
 
 			let venta = await this.registrarVenta(Date.now(), this.nombreComprador.current.value, this.direccionComprador.current.value, this.telefonoComprador.current.value);
 			let id_venta = venta[0]["id"];
 			this.state.allProductsSelected.map((item, index)=>{
 				console.log(item["id"], id_venta)
 				this.registrarVentaProducto(item["id"], id_venta);
+				return(null);
 			})
 
 

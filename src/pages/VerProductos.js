@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Tabla from '../components/Tabla';
-import Header from '../components/Header';
+//import Header from '../components/Header';
 import BaseComponent from '../components/BaseComponent'
 
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import ClearIcon from '@material-ui/icons/Clear';
 
-import Modal from '@material-ui/core/Modal';
+//import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+//import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
@@ -180,7 +180,7 @@ class VerProductos extends BaseComponent {
 
 	render() {
 
-		const { searchTable, isModalOpen } = this.state;
+		const { isModalOpen } = this.state;
 
 		return (
 			<div className="page">
