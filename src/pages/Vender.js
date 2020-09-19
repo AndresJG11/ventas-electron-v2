@@ -94,6 +94,15 @@ class Vender extends BaseComponent {
 				"telefono": this.telefonoComprador.current.value,
 			};
 
+			let venta = await this.registrarVenta(Date.now(), this.nombreComprador.current.value, this.direccionComprador.current.value, this.telefonoComprador.current.value);
+			let id_venta = venta[0]["id"];
+			this.state.allProductsSelected.map((item, index)=>{
+				console.log(item["id"], id_venta)
+				this.registrarVentaProducto(item["id"], id_venta);
+			})
+
+
+
 			//this.registrarVenta(new Date().getDate(), )
 			/*
 			var self = this;

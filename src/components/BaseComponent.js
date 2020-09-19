@@ -40,7 +40,11 @@ class BaseComponent extends Component{
 	}
 
 	registrarVenta(fecha, nombre_comprador, direccion_comprador, telefono_comprador){
-		return this.db.crearProducto(fecha, nombre_comprador, direccion_comprador, telefono_comprador)
+		return this.db.crearVenta(fecha, nombre_comprador, direccion_comprador, telefono_comprador)
+	}
+
+	registrarVentaProducto(id_producto, id_venta){
+		return this.db.crearVentaProducto(id_producto, id_venta)
 	}
 
 	obtenerProductos(){
@@ -70,6 +74,11 @@ class BaseComponent extends Component{
 			});
 
         this.db.crearTablaVentas().catch((err) => {
+                console.log('Error ventas table: ')
+                console.log(JSON.stringify(err))
+			});
+
+        this.db.crearTablaVentasProductos().catch((err) => {
                 console.log('Error ventas table: ')
                 console.log(JSON.stringify(err))
 			});

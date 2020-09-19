@@ -32,7 +32,7 @@ class Crud {
         password TEXT)`
         return this.dao.run(sql);
     }
-    
+
     crearUsuario(dt, userName, password){
         return this.dao.run(
             `INSERT INTO users (DT, userName, password) VALUES (?,?,?)`,
@@ -84,11 +84,27 @@ class Crud {
         return this.dao.run(sql);
     }
 
-    crearVenta(fecha, nombre_comprador, direccion_comprador, telefono_comprador){
-        return this.dao.run(
-            `INSERT INTO users (fecha, nombre_comprador, direccion_comprador, telefono_comprador) VALUES (?,?,?,?)`,
-            [fecha, nombre_comprador, direccion_comprador, telefono_comprador]);
+    crearTablaVentasProductos(){
+        const sql = `
+        CREATE TABLE IF NOT EXISTS venta_productos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id_venta INTEGER,
+            id_producto INTEGER)`
+        return this.dao.run(sql);
     }
+
+    crearVenta(fecha, nombre_comprador, direccion_comprador, telefono_comprador){
+        this.dao.run(
+            `INSERT INTO ventas (fecha, nombre_comprador, direccion_comprador, telefono_comprador) VALUES (?,?,?,?)`,
+            [fecha, nombre_comprador, direccion_comprador, telefono_comprador]);
+       return this.dao.all(`SELECT * FROM ventas ORDER BY id DESC limit 1`);
+    }
+
+	 crearVentaProducto(id_producto, id_venta){
+        this.dao.run(
+            `INSERT INTO venta_productos (id_venta, id_producto) VALUES (?,?)`,
+            [id_venta, id_producto]);
+	 }
 
     getAllVentas(){
         return this.dao.all(`SELECT * FROM ventas`);
