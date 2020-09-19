@@ -227,7 +227,7 @@ class Vender extends BaseComponent {
 							autoFocus
 							margin="dense"
 							id="direccionID"
-							label="direccion"
+							label="Direccion"
 							type="text"
 							fullWidth
 							required={true}

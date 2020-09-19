@@ -40,7 +40,7 @@ class VerProductos extends BaseComponent {
 
 		console.log("VerProductos")
 
-		this.state = { searchTable: '', isModalOpen: false }
+		this.state = { isModalOpen: false }
 
 		this.handleAddProduct = this.handleOpenModal.bind(this);
 		this.handleOnChange = this.handleOnChange.bind(this);
@@ -68,9 +68,9 @@ class VerProductos extends BaseComponent {
 	}
 
 	async getProducts() {
-		const productsList = await this.obtenerProductos();
+		this.productsList = await this.obtenerProductos();
 		this.setState({
-			"productos": productsList
+			"productos": this.productsList
 		});
 	}
 
@@ -83,13 +83,18 @@ class VerProductos extends BaseComponent {
 	}
 
 	handleOnChange(e) {
-		const value = e.target.value;
-		this.setState({ searchTable: value });
+		const criterioBusqueda = this.textInput.current.value;
+		if(criterioBusqueda.length >= 3){
+			const filterArray = this.productsList.filter( (producto) => (producto["nombre"]+producto["barras"]).includes(criterioBusqueda) )
+			this.setState( {"productos": filterArray } )
+		} else{
+			this.setState( {"productos": this.productsList } )
+		}
 	}
 
 	handleDeleteText(e) {
-		this.setState({ searchTable: '' })
 		this.textInput.current.focus();
+		this.textInput.current.value = '';
 	}
 
 	handleModalClose() {
@@ -102,7 +107,7 @@ class VerProductos extends BaseComponent {
 		let cantidad = this.modalCantidad.current.value;
 		let codigo = this.modalCodigo.current.value;
 		let precio = this.modalCodigo.current.value;
-		this.registrarProducto(nombre, cantidad, codigo, precio).then( async (id) => {
+		this.registrarProducto(nombre, cantidad, codigo, precio).then(async (id) => {
 			//BaseComponent.alertField.current.open("Producto creado con éxito", "success");
 			await this.getProducts();
 			this.setState({ isModalOpen: false });
@@ -259,8 +264,8 @@ class VerProductos extends BaseComponent {
 						</button>
 
 						<div className="input-icons">
-							<ClearIcon className={`mi icon ${this.state.searchTable.length === 0 && 'invisible'} `} onClick={this.handleDeleteText} />
-							<input type="text" className="input-search" placeholder="Buscar en tabla..." ref={this.textInput} onChange={this.handleOnChange} value={this.state.searchTable} />
+							<ClearIcon className={`mi icon ${this.textInput.current?.value.length === 0 && 'invisible'} `} onClick={this.handleDeleteText} />
+							<input type="text" className="input-search" placeholder="Buscar en tabla..." ref={this.textInput} onChange={this.handleOnChange} />
 						</div>
 						<br />
 						<br />

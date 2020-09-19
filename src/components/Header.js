@@ -1,8 +1,8 @@
 import React from 'react';
 import BaseComponent from '../components/BaseComponent';
 
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+/*import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';*/
 
 class Header extends BaseComponent {
 
