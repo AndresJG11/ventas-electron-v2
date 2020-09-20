@@ -586,10 +586,13 @@ input[type="number"]::-webkit-inner-spin-button,
 
 /***GenerarReporte***/
 .generarReporte-root{
-	background-color: gray;
+	//background-color: gray;
 	form{
 		display: flex;
 		justify-content: space-around;
+		background-color: white;
+	}
+	.datepicker{
 	}
 }
 

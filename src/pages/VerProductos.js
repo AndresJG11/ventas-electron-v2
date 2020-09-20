@@ -107,14 +107,9 @@ class VerProductos extends BaseComponent {
 		let nombre = this.modalNombre.current.value;
 		let cantidad = this.modalCantidad.current.value;
 		let codigo = this.modalCodigo.current.value;
-		let precio = this.modalCodigo.current.value;
-<<<<<<< HEAD
+		let precio = this.modalPrecio.current.value;
 		this.registrarProducto(nombre, cantidad, codigo, precio).then( async (id) => {
 			BaseComponent.alertField.current.open("Producto creado con éxito", "success");
-=======
-		this.registrarProducto(nombre, cantidad, codigo, precio).then(async (id) => {
-			//BaseComponent.alertField.current.open("Producto creado con éxito", "success");
->>>>>>> 10c8b07a2ca3ee21ff9d11986ab016d8eab43164
 			await this.getProducts();
 			this.setState({ isModalOpen: false });
 		}).catch((err) => {

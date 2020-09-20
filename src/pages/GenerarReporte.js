@@ -26,7 +26,8 @@ class GenerarReporte extends BaseComponent {
 
     handleDataChange(e) {
         const { value, id } = e.target;
-        const fecha = new Date(value);
+        const parseFecha = value.split('-')
+        const fecha = new Date(parseFecha);
         if (id === 'inicio') {
             this.setState({ fechaInicio: fecha })
         } else {
@@ -51,7 +52,8 @@ class GenerarReporte extends BaseComponent {
             productos.push({
                 id: i,
                 nombre: 'producto_' + i,
-                cantidad: i,
+                added: i,
+                precio: i,
                 fecha_edicion: new Date(2020, 9, i + 1),
                 barras: i * 1002,
             })
@@ -79,7 +81,7 @@ class GenerarReporte extends BaseComponent {
     }
 
     render() {
-        const { dataReporte } = this.state;
+        const { dataReporte, fechaInicio, fechaFinal } = this.state;
         return (
             <div className="page">
 
@@ -101,6 +103,7 @@ class GenerarReporte extends BaseComponent {
                         <TextField
                             id="final"
                             label="Final"
+                            style={{datePicker:{color:"white"}}}
                             onChange={this.handleDataChange}
                             type="date"
                             defaultValue={this.getTodayDate()}
@@ -113,7 +116,7 @@ class GenerarReporte extends BaseComponent {
                     <button className="btn" onClick={this.handleGenerarReporte} > Generar Reporte </button>
 
                     <div className="generarReporte-pdf">
-                        {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} />}
+                        {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} fechaInicio={fechaInicio} fechaFinal={fechaFinal} />}
                     </div>
                 </div>
 

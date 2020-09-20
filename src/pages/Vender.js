@@ -69,7 +69,7 @@ class Vender extends BaseComponent {
 				}
 				flagRepetido = true;
 			}
-			return(null);
+			return (null);
 		});
 
 		if (!flagRepetido) {
@@ -98,12 +98,19 @@ class Vender extends BaseComponent {
 
 			let venta = await this.registrarVenta(Date.now(), this.nombreComprador.current.value, this.direccionComprador.current.value, this.telefonoComprador.current.value);
 			let id_venta = venta[0]["id"];
-			this.state.allProductsSelected.map((item, index)=>{
+			this.state.allProductsSelected.map((item, index) => {
 				console.log(item["id"], id_venta)
 				this.registrarVentaProducto(item["id"], id_venta);
-				return(null);
+				return (null);
 			})
 			BaseComponent.alertField.current.open("Venta agregada con éxito", "success");
+
+			this.nombreComprador.current.value = ''
+			this.telefonoComprador.current.value = ''
+			this.direccionComprador.current.value = ''
+			this.cantidad.current.value = ''
+
+			this.setState({allProductsSelected: [], currentSelected: {}})
 
 
 
