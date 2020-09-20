@@ -68,11 +68,18 @@ class VerProductos extends BaseComponent {
 		await this.getProducts();
 	}
 
-	async getProducts() {
+	async getProducts(refresh=false) {
 		this.productsList = await this.obtenerProductos();
-		this.setState({
-			"productos": this.productsList
-		});
+		const {state} = this.props.location
+		if( typeof state === 'undefined' || state.busquedaProductos.length < 0 || refresh){
+			this.setState({
+				"productos": this.productsList
+			});
+		} else{
+			this.setState({
+				"productos": state.busquedaProductos
+			});
+		}
 	}
 
 	handleOpenModal(event) {
@@ -80,7 +87,7 @@ class VerProductos extends BaseComponent {
 	}
 
 	async handleRefreshTable() {
-		await this.getProducts();
+		await this.getProducts(true);
 	}
 
 	handleOnChange(e) {

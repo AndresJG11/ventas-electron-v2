@@ -6,7 +6,7 @@ import Vender from './pages/Vender'
 import VerProductos from './pages/VerProductos'
 import App from "./components/App";
 
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './public/styles/main.scss'
 

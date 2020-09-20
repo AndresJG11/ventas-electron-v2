@@ -6,7 +6,6 @@ import Header from './Header'
 class App extends Component {
     render() {
         const match = this.props.location.pathname;
-        console.log('match  ', match)
         return (
             match === '/' ? < Login {...this.props} /> :
             <div className="page">
@@ -14,7 +13,7 @@ class App extends Component {
                     <LeftPanel {...this.props} />
                 </div>
                 <div className="page-body">
-                    <Header/>
+                    <Header {...this.props} />
                 </div>
             </div>
         );

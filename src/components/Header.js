@@ -9,18 +9,25 @@ class Header extends BaseComponent {
     constructor(props) {
         super(props);
         this.typeField = "Header";
-        this.state = { searchInput: "" }
+        this.busqueda = React.createRef();
+        //this.state = {productos: []}
     }
-    fromIdButton = 'verVentas';
     handleOnChangeInput = (e) => {
         const readInput = e.target.value;
-        this.setState({ ...this.setState, searchInput: readInput });
-        this.redirectTo("/login", "/login")
+        if(readInput.length >= 3 && this.props.location.pathname!=='/verProductos' ) {
+			const filterArray = this.productsList.filter( (producto) => (producto["nombre"]+producto["barras"]).includes(readInput) )
+            this.props.history.push('/verProductos', {busquedaProductos: filterArray})
+		} else{
+			//this.setState( {"productos": this.productsList } )
+        }
     }
 
     handleOnSubmit = (e) => {
         e.preventDefault();
-        console.log("Buscar: " + this.state.searchInput);
+    }
+
+    async componentDidMount(){
+        this.productsList = await this.obtenerProductos();
     }
 
 
@@ -31,7 +38,7 @@ class Header extends BaseComponent {
                 <div className="header-top">
                     <div></div>
                     <form onSubmit={this.handleOnSubmit}>
-                        <input placeholder="Busqueda" type="text" className="input-search input-text" onChange={this.handleOnChangeInput} value={this.state.searchInput} />
+                        <input placeholder="Busqueda" type="text" ref={this.busqueda} className="input-search input-text" onChange={this.handleOnChangeInput} />
                     </form>
                 </div>
             </header>
