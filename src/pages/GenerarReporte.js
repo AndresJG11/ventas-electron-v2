@@ -1,6 +1,9 @@
 import React from 'react'
 
 import TextField from '@material-ui/core/TextField';
+
+import ReactToPdf from 'react-to-pdf'
+
 import { ReportePDF } from '../components/ReportePDF'
 import BaseComponent from '../components/BaseComponent'
 
@@ -14,6 +17,9 @@ class GenerarReporte extends BaseComponent {
         this.handleDataChange = this.handleDataChange.bind(this);
         this.handleGenerarReporte = this.handleGenerarReporte.bind(this);
         this.simularReporte = this.simularReporte.bind(this);
+
+        this.ref = React.createRef();
+
     }
 
     getTodayDate() {
@@ -85,7 +91,7 @@ class GenerarReporte extends BaseComponent {
         return (
             <div className="page">
 
-					<div className="left-panel-container"> </div>
+                <div className="left-panel-container"> </div>
 
 
                 <div className="generarReporte-root">
@@ -103,7 +109,7 @@ class GenerarReporte extends BaseComponent {
                         <TextField
                             id="final"
                             label="Final"
-                            style={{datePicker:{color:"white"}}}
+                            style={{ datePicker: { color: "white" } }}
                             onChange={this.handleDataChange}
                             type="date"
                             defaultValue={this.getTodayDate()}
@@ -115,13 +121,23 @@ class GenerarReporte extends BaseComponent {
 
                     <button className="btn" onClick={this.handleGenerarReporte} > Generar Reporte </button>
 
-                    <div className="generarReporte-pdf">
-                        {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} fechaInicio={fechaInicio} fechaFinal={fechaFinal} />}
+                    <div>
+                        <ReactToPdf targetRef={this.ref} filename="div-blue.pdf" y={0}>
+                            {({ toPdf }) => (
+                                <button onClick={toPdf}>Generate pdf</button>
+                            )}
+                        </ReactToPdf>
+                    </div>
+
+                    <div className="generarReporte-pdf"  >
+                        <div ref={this.ref}>
+                            {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} fechaInicio={fechaInicio} fechaFinal={fechaFinal} />}
+                        </div>
                     </div>
                 </div>
 
 
-	 				<AlertField ref={BaseComponent.alertField} />
+                <AlertField ref={BaseComponent.alertField} />
             </div>
         )
     }

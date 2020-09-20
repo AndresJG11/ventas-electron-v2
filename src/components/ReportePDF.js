@@ -22,7 +22,7 @@ export const ReportePDF = (props) => {
   const { dataReporte, fechaInicio, fechaFinal } = props
   console.log(dataReporte)
   return (
-    <div>
+    <div className="reporte-documento">
       <div className="reporte-header">
         <h1> Reporte de ventas  </h1>
         <span> {formatFecha(fechaInicio)} - {formatFecha(fechaFinal)}  </span>
@@ -30,13 +30,23 @@ export const ReportePDF = (props) => {
 
       {dataReporte.map((venta) => (<div className="reporte-venta" key={venta['id']}>
         <div className="reporte-cliente" >
-          <span> Nombre: </span> <p> {venta["nombre_comprador"]} </p>
-          <span> Teléfono: </span> <p> {venta["telefono_comprador"]} </p>
-          <span> Dirección: </span> <p> {venta["direccion_comprador"]} </p>
-          <span> Fecha: </span> <p> {formatFecha(venta["fecha"])} </p>
+          <div className="cliente-dato">
+            <span> Nombre: </span> <p> {venta["nombre_comprador"]} </p>
+          </div>
+          <div className="cliente-dato">
+            <span> Teléfono: </span> <p> {venta["telefono_comprador"]} </p>
+          </div>
+          <div className="cliente-dato">
+            <span> Dirección: </span> <p> {venta["direccion_comprador"]} </p>
+          </div>
+          <div className="cliente-dato">
+          </div>
+          <div className="cliente-dato">
+            <span> Fecha: </span> <p> {formatFecha(venta["fecha"])} </p>
+          </div>
         </div>
         <div>
-          <table className="verProductos-tabla">
+          <table className="reporte-tabla">
             <thead>
               <tr>
                 <th> Producto </th>

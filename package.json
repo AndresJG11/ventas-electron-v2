@@ -21,6 +21,7 @@
     "react-flip-move": "^3.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-to-pdf": "^0.0.13",
     "sass": "^1.26.10",
     "sqlite3": "^4.1.1"
   },
